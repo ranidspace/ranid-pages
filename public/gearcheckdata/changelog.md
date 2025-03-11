@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+
+- Backend rewrite, better documentation, may be faster.
+- Gear you own now uses images from Nintendo's servers. May cause issues so this may be reverted
+
 ## 1.2.5
 
 - Fix to make new amiibo gear not show when "Hide Amiibo Gear" is selected

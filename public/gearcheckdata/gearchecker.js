@@ -1,180 +1,248 @@
-// Constants
-
-const database = "https://raw.githubusercontent.com/Leanny/splat3/main/";
-
-jfetch(database + "versions.json").then((data) => {
-  ver = data.at(-1);
-});
-
-// Functions
+/**
+ * A webpage to check status on completeting your gear collection.
+ *
+ * @author ranidspace
+ * @since 1.3.0
+ */
 
 async function submit() {
   //clear all data on the page
   document.getElementById("output").innerHTML = "";
+  // Constants
+  const info = await getData();
 
   // get data from the provided geardata file
   new Response(document.getElementById("geardata").files[0]).json().then(
     (userGear) => {
-      //prepping html stuff
-      let div = document.createElement("details");
-      div.className = "toggle";
-      div.id = "missingear";
-      div.open = true;
-      document.getElementById("output").appendChild(div);
+      const output = document.getElementById("output");
 
-      div = document.createElement("summary");
-      div.className = "lbl-toggle";
-      div.id = "missingtitle";
-      div.textContent = `Missing Gear`;
-      document.getElementById("missingear").appendChild(div);
+      //prepping html for missing gear
+      let misDiv = document.createElement("details");
+      let misTitle = document.createElement("summary");
+      let misContainer = document.createElement("div");
 
-      div = document.createElement("div");
-      div.className = "gear-container";
-      div.id = "Missing";
-      document.getElementById("missingear").appendChild(div);
+      misDiv.className = "toggle";
+      misDiv.open = true;
 
+      misTitle.className = "lbl-toggle";
+      misTitle.textContent = "Missing Gear";
+
+      misContainer.className = "gear-container";
+
+      misDiv.appendChild(misTitle);
+      misDiv.appendChild(misContainer);
+      output.appendChild(misDiv);
+
+      // Print version to console
       console.log(
-        `The current splatoon version is ` +
-          ver.substr(0, 1) +
+        "The current splatoon version is " +
+          info.ver.substr(0, 1) +
           "." +
-          ver.substr(1, 1) +
+          info.ver.substr(1, 1) +
           "." +
-          ver.substr(2, 1),
+          info.ver.substr(2, 1)
       );
-      // run the missing gear function
-      missinggear(userGear, "head", "Head");
-      missinggear(userGear, "clothing", "Clothes");
-      missinggear(userGear, "shoes", "Shoes");
 
-      document
-        .getElementById(`output`)
-        .appendChild(document.createElement("hr"));
+      // Display all missing gear
+      let missing = missingGear(info, userGear);
+      displayGear(info, missing, misContainer);
+
+      output.appendChild(document.createElement("hr"));
 
       // Loop through 0-5 stars and find the gear for each
-      for (let i = 0; i < 6; i++) {
-        let div = document.createElement("details");
-        div.className = "toggle";
-        div.id = `collapsible${i}`;
-        div.open = true;
-        document.getElementById(`output`).appendChild(div);
+      for (let i = 0; i <= 5; i++) {
+        let starDiv = document.createElement("details");
+        let starTitle = document.createElement("summary");
+        let starContainer = document.createElement("div");
 
-        div = document.createElement("summary");
-        div.className = "lbl-toggle";
-        div.textContent = i + ` Star Gear`;
-        document.getElementById(`collapsible${i}`).appendChild(div);
+        starDiv.className = "toggle";
+        starDiv.open = true;
 
-        div = document.createElement("div");
-        div.className = "gear-container collapsible-content";
-        div.id = String(i);
-        document.getElementById(`collapsible${i}`).appendChild(div);
+        starTitle.className = "lbl-toggle";
+        starTitle.textContent = i + " Star Gear";
 
-        starcount(userGear, "headGear", "GearInfoHead", i);
-        starcount(userGear, "clothingGear", "GearInfoClothes", i);
-        starcount(userGear, "shoesGear", "GearInfoShoes", i);
+        starContainer.className = "gear-container collapsible-content";
+
+        starCount(info, userGear, i, starContainer);
+
+        starDiv.appendChild(starTitle);
+        starDiv.appendChild(starContainer);
+        output.appendChild(starDiv);
+
         if (i != 5) {
-          document
-            .getElementById(`output`)
-            .appendChild(document.createElement("hr"));
+          output.appendChild(document.createElement("hr"));
         }
       }
     },
     (err) => {
       console.log(err);
-    },
+    }
   );
 }
+/**
+ * Return info from Lean's Database
+ */
+async function getData() {
+  const BASE_URL = "https://raw.githubusercontent.com/Leanny/splat3/main/";
+  const verPromise = await jfetch(BASE_URL + "versions.json");
+  const ver = await verPromise.at(-1);
 
-// this function shows the missing gear for
-async function missinggear(gearlist, Gear, GearInfo) {
-  const path = gearlist["gear"]["data"][Gear + "Gears"]["nodes"];
-  const jsonlistunfiltered = await jfetch(
-    database + `data/mush/${ver}/GearInfo${GearInfo}.json`,
-  );
-  const translate = await jfetch(database + `data/language/USen.json`);
-
-  let jsonlist = [];
-  // TODO: improve performace. apparently for loops are faster than filtering.
-  // idk, nothing seems to work
-  jsonlist = jsonlistunfiltered.filter(
-    (x) =>
-      !(
-        x.HowToGet === "Impossible" ||
-        x.Season > ver.substring(0, 1) ||
-        x.__RowId === "Clt_HAP001"
-      ),
-  );
-  const difference = jsonlist.filter(
-    (entry1) => !path.some((entry2) => entry1.Id === entry2[Gear + "GearId"]),
-  );
-
-  for (i = 0; i < difference.length; i++) {
-    let div = document.createElement("div");
-    div.className = "item";
-    if (
-      difference[i].__RowId.substr(4, 3) === "AMB" ||
-      (difference[i].__RowId.substr(4, 3) === "MSN" &&
-        difference[i].HowToGet === "Other")
-    ) {
-      div.classList.add("amiiboitem");
-    }
-    if (difference[i].HowToGet === "Uroko") {
-      div.classList.add("urokoitem");
-    }
-    div.id = String(Gear + String(i));
-    document.getElementById("Missing").appendChild(div);
-
-    div = document.createElement("img");
-    div.src = database + `/images/gear/${difference[i]["__RowId"]}.png`;
-    div.alt =
-      translate["CommonMsg/Gear/GearName_" + GearInfo][
-        difference[i]["__RowId"].substr(4)
-      ];
-    document.getElementById(Gear + String(i)).appendChild(div);
-
-    div = document.createElement("span");
-    div.className = "gearname";
-    div.textContent =
-      translate["CommonMsg/Gear/GearName_" + GearInfo][
-        difference[i]["__RowId"].substr(4)
-      ];
-    document.getElementById(Gear + i).appendChild(div);
-  }
-}
-// starcount:  create divs for every gear for each star level
-async function starcount(gearlist, Gear, GearInfo, Stars) {
-  const path = gearlist.gear.data[Gear + "s"].nodes;
-  const jsonlist = await jfetch(database + `data/mush/${ver}/${GearInfo}.json`);
-
-  for (let i = 0; i < path.length; i++) {
-    if (path[i].rarity === Stars) {
-      let div = document.createElement("div");
-
-      div.className = "item";
-      div.id = path[i].name;
-      document.getElementById(Stars).appendChild(div);
-
-      const gearitem =
-        jsonlist[jsonlist.findIndex((obj) => obj.Id === path[i][Gear + "Id"])];
-
-      div = document.createElement("img");
-      div.src = database + `images/gear/${gearitem.__RowId}.png`;
-      div.alt = path[i].name;
-      document.getElementById(path[i].name).appendChild(div);
-
-      div = document.createElement("span");
-      div.className = "gearname";
-      div.textContent = path[i].name;
-      document.getElementById(path[i].name).appendChild(div);
-    }
-  }
+  const links = await Promise.all([
+    jfetch(BASE_URL + `data/mush/${ver}/GearInfoHead.json`),
+    jfetch(BASE_URL + `data/mush/${ver}/GearInfoClothes.json`),
+    jfetch(BASE_URL + `data/mush/${ver}/GearInfoShoes.json`),
+    jfetch(BASE_URL + "data/language/USen.json"),
+  ]);
+  const gearInfo = [links[0], links[1], links[2]];
+  const lang = links[3];
+  return { ver: ver, gear: gearInfo, lang: lang };
 }
 
+/**
+ * @param {string} url - The url the json is fetched from.
+ * @returns {Object} The fetched json data.
+ */
 async function jfetch(url) {
   const response = await fetch(url);
   return response.json();
 }
 
-//all of this is for the darkmode toggle
+/**
+ * Finds which gear is missing.
+ *
+ * @param {Object} info - Info downloaded from database
+ * @param {Object} gearList - User's gear list
+ *
+ * @returns {Object[]}
+ */
+function missingGear(info, gearList) {
+  const gear = ["head", "clothing", "shoes"];
+  let output = new Array();
+
+  for (let i = 0; i < 3; i++) {
+    const path = gearList.gear.data[gear[i] + "Gears"].nodes;
+    const jsonlistunfiltered = info.gear[i];
+
+    let jsonlist = [];
+    // TODO: improve performace. apparently for loops are faster than filtering.
+    // idk, nothing seems to work
+    jsonlist = jsonlistunfiltered.filter(
+      (x) =>
+        !(
+          x.HowToGet === "Impossible" ||
+          x.Season > info.ver.substring(0, 1) ||
+          x.__RowId === "Clt_HAP001"
+        )
+    );
+    output.push(
+      jsonlist.filter(
+        (entry1) =>
+          !path.some((entry2) => entry1.Id === entry2[gear[i] + "GearId"])
+      )
+    );
+  }
+  return output;
+}
+
+/**
+ * Creates the divs which the missing gear is shown
+ *
+ * @param info - Info downloaded from database.
+ * @param {Object[]} missing - Array of missing gear by type.
+ * @param {HTMLElement} div - Div that the gear will be appended to.
+ */
+function displayGear(info, missing, div) {
+  const BASE_URL = "https://raw.githubusercontent.com/Leanny/splat3/main/";
+  const gearTypes = ["Head", "Clothes", "Shoes"];
+
+  for (j = 0; j < 3; j++) {
+    // loop over every item
+    const gearType = gearTypes[j];
+    const diff = missing[j];
+
+    // Each loop creates a single entry
+    for (i = 0; i < diff.length; i++) {
+      const image = BASE_URL + `/images/gear/${diff[i].__RowId}.png`;
+      const name =
+        info.lang["CommonMsg/Gear/GearName_" + gearType][
+          diff[i].__RowId.substr(4)
+        ];
+
+      let item = makeItem(image, name);
+
+      // Add classes based on what kind of item
+      if (
+        diff[i].__RowId.substr(4, 3) === "AMB" ||
+        (diff[i].__RowId.substr(4, 3) === "MSN" &&
+          diff[i].HowToGet === "Other")
+      ) {
+        item.classList.add("amiiboitem");
+      }
+
+      if (diff[i].HowToGet === "Uroko") {
+        item.classList.add("urokoitem");
+      }
+
+      div.appendChild(item);
+    }
+  }
+}
+
+/**
+ * Displays the owned gear at each star level
+ *
+ * @param info - Info downloaded from database.
+ * @param gearlist
+ * @param {number} stars - The number of stars the gear has.
+ * @param {HTMLElement} div - The container the gear will be appended to
+ */
+async function starCount(gearlist, stars, div) {
+  const gearTypes = ["head", "clothing", "shoes"];
+
+  // loop for each type of gear
+  for (let j = 0; j < 3; j++) {
+    const userGear = gearlist.gear.data[gearTypes[j] + "Gears"].nodes;
+
+    // loop over all items
+    for (let i = 0; i < userGear.length; i++) {
+      if (userGear[i].rarity === stars) {
+        const image = userGear[i].image.url;
+        const name = userGear[i].name;
+
+        let item = makeItem(image, name);
+        div.appendChild(item);
+      }
+    }
+  }
+}
+
+/**
+ * Creates an item with an image and label
+ *
+ * @param {string} image - URL of the image.
+ * @param {string} name - Name of the item.
+ */
+function makeItem(image, name) {
+  let par = document.createElement("div");
+  let img = document.createElement("img");
+  let lbl = document.createElement("span");
+
+  par.className = "item";
+
+  img.src = image;
+  img.alt = name;
+
+  lbl.className = "gearname";
+  lbl.textContent = name;
+
+  par.appendChild(img);
+  par.appendChild(lbl);
+  return par;
+}
+
+/**
+ * Toggles theme on the page.
+ */
 function changetheme() {
   let currentThemeSetting = document
     .querySelector("html")
@@ -187,6 +255,9 @@ function changetheme() {
   currentThemeSetting = newTheme;
 }
 
+/**
+ * Checks if user prefers dark mode, or if they have selected dark mode before.
+ */
 function loadpage() {
   switch (localStorage.getItem("theme")) {
     case null:
