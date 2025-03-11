@@ -63,7 +63,7 @@ async function submit() {
 
         starContainer.className = "gear-container collapsible-content";
 
-        starCount(info, userGear, i, starContainer);
+        starCount(userGear, i, starContainer);
 
         starDiv.appendChild(starTitle);
         starDiv.appendChild(starContainer);
