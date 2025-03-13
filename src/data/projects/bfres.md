@@ -1,7 +1,6 @@
 ---
 title: "Blender BFRES Importer"
 link: https://github.com/ranidspace/BlenderBfresImporter
-image: "bfresImporter.png"
 alt: "A Blender screenshot of Harmony from Splatoon"
 order: 4
 ---

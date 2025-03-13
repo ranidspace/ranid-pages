@@ -1,7 +1,6 @@
 ---
 title: "Trans Pack (No longer maintained)"
 link: https://www.planetminecraft.com/texture-pack/trans-texture-pack/
-image: "transpack.png"
 alt: "A minecraft screenshot with various items coloured with the transgender flag"
 order: 1
 ---

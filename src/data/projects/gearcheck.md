@@ -1,7 +1,6 @@
 ---
 title: "Splatoon 3 Gear Completion Checker"
 link: /gearcheck
-image: "gearcheck.png"
 alt: "A grid of various labelled Splatoon 3 clothing"
 order: 3
 ---

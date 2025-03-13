@@ -1,0 +1,37 @@
+---
+const title = "Ranid Blog";
+import Default from "@layouts/Default.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
+);
+import markdownit from "markdown-it";
+const md = markdownit("commonmark");
+---
+
+<Default title={title}>
+  {
+    posts.map(async (post) => {
+      const split = post.body.split("<!--more-->");
+      const excerpt = md.render(split[0]);
+      const link = "/blog/" + post.id;
+      return (
+        <div class="blogpost">
+          <h4>
+            <a href={link}>{post.data.title}</a>
+          </h4>
+          <h5>
+            {post.data.date.toLocaleString("en-CA", { timeFormat: "short" })}
+          </h5>
+          {post.data.updated && <h5>Updated {post.data.updated}</h5>}
+          <Fragment set:html={excerpt} />
+          {split[1] && (
+            <p>
+              <a href={link}>[View full post]</a>
+            </p>
+          )}
+        </div>
+      );
+    })
+  }
+</Default>

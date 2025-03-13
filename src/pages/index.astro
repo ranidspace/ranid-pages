@@ -10,6 +10,11 @@ const md = markdownit("commonmark");
 ---
 
 <style>
+  .content-box {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   .info-flex {
     display: flex;
     flex-wrap: wrap;
@@ -32,6 +37,18 @@ const md = markdownit("commonmark");
     min-width: 18rem;
   }
 
+  .media-list-mobile {
+    display: none;
+    width: 60%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .media-list-mobile img {
+    width: 5rem;
+  }
+
   @media screen and (max-device-width: 1000px) {
     .info-flex {
       flex-direction: column;
@@ -40,8 +57,7 @@ const md = markdownit("commonmark");
 
     .info-text {
       display: block;
-      margin: auto;
-      text-align: center;
+      margin: 3rem auto;
       padding: 0;
       max-width: none;
     }
@@ -49,15 +65,35 @@ const md = markdownit("commonmark");
     .media-list {
       display: none;
     }
+
+    .media-list-mobile {
+      display: flex;
+      margin-bottom: 5rem;
+    }
   }
 </style>
 
 <Default pageTitle={title}>
   <div class="info-flex">
     <div class="info-text">
-      Hi, this is Audrey, but you may know me as Ranid or Ranidspace. I go by
-      They/It/Xe pronouns. I am not a web designer (which may be apparent).
-      Feel free to look around. This website is severely unfinished!
+      Hey this is Audrey (They/It/Xe), also known as ranidspace. I'm into
+      computer science, astronomy, video games, 3D art, and whatever I feel
+      like at the time. I'm not good at graphic design so this website may look
+      a little ass but I'm hoping to improve as I continue to work on it.
+    </div>
+    <div class="media-list-mobile">
+      <a>
+        <img src="/images/icons/github.svg" />
+      </a>
+      <a>
+        <img src="/images/icons/youtube.svg" />
+      </a>
+      <a>
+        <img src="/images/icons/discord.svg" />
+      </a>
+      <a>
+        <img src="/images/icons/rss.svg" />
+      </a>
     </div>
 
     <div class="media-list">
@@ -82,30 +118,4 @@ const md = markdownit("commonmark");
       </ul>
     </div>
   </div>
-
-  <div class="bloghead">Blog</div>
-  {
-    posts.map(async (post) => {
-      const split = post.body.split("<!--more-->");
-      const excerpt = md.render(split[0]);
-      const link = "/blog/" + post.id;
-      return (
-        <div class="blogpost">
-          <h4>
-            <a href={link}>{post.data.title}</a>
-          </h4>
-          <h5>
-            {post.data.date.toLocaleString("en-CA", { timeFormat: "short" })}
-          </h5>
-          {post.data.updated && <h5>Updated {post.data.updated}</h5>}
-          <Fragment set:html={excerpt} />
-          {split[1] && (
-            <p>
-              <a href={link}>[View full post]</a>
-            </p>
-          )}
-        </div>
-      );
-    })
-  }
 </Default>
