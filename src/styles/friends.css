@@ -39,7 +39,8 @@
   margin: 0.1em 1em;
 }
 
-.lise a:link {
+.lise a {
+  font-size: 1em;
   color: rgb(91, 206, 250);
   text-decoration: none;
   font-family: "pixter-granularregular";
@@ -87,13 +88,19 @@
   margin: 4pt 0;
 }
 
-.doomhardy a:link {
+.doomhardy a {
+  font-size: 1em;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   color: #add7fd;
 }
 
 .doomhardy a:visited {
   color: #d3adfd;
+}
+
+@font-face {
+  font-family: "fontstuck";
+  src: url("/fonts/fontstuck-extended.otf") format("opentype");
 }
 
 .gira {
@@ -115,11 +122,9 @@
   margin: 4pt 0;
 }
 
-@font-face {
-  font-family: "fontstuck";
-  src: url("/fonts/fontstuck-extended.otf") format("opentype");
-}
 .gira a {
+  font-family: sans-serif;
+  font-size: 0.9em;
   color: #4f0099;
   font-weight: bold;
   text-decoration: none;
