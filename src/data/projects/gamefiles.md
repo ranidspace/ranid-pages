@@ -1,7 +1,6 @@
 ---
 title: "splatoongamefiles"
 link: https://liquidcrystalsky.tumblr.com
-image: "splatoongamefiles.png"
 alt: "A tumblr profile for 'splatoongamefiles' the title of the blog is 'Forever trapped in Switch Tooblox'"
 order: 2
 ---

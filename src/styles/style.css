@@ -42,12 +42,10 @@ h5 {
   padding: 1em;
   margin: 1.5em auto 0.8em;
   background-color: var(--color-bg);
-  border-radius: 1rem;
 }
 
 .navigation {
   text-align: center;
-  font-size: 20px;
   margin: 0;
 }
 
@@ -58,10 +56,14 @@ h5 {
   font-family: "Martian Mono", monospace;
   font-weight: bold;
 }
+
 .blogpost {
   margin-top: 1em;
-  border-top: 2px solid var(--color-hr);
   padding-top: 0.5em;
+}
+
+.blogpost ~ .blogpost {
+  border-top: 2px solid var(--color-hr);
 }
 
 .blogpost p {
@@ -71,14 +73,7 @@ h5 {
 a {
   font-family: "Martian Mono", monospace;
   font-size: 0.857em;
-}
-
-a:link {
   color: #0d2fff;
-}
-
-a:visited {
-  color: #9d00bd;
 }
 
 a:active {
