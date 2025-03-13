@@ -1,7 +1,6 @@
 ---
 title: "Every Movie I've Ever Watched"
 link: https://letterboxd.com/lazygott/
-image: "letterboxd.png"
 alt: "The letterboxd logo"
 order: 0
 ---

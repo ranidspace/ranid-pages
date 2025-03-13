@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 const projects = (await getCollection("projects")).sort(
   (a, b) => b.data.order - a.data.order
 );
+import ProjectImage from "@components/ProjectImage.astro";
 ---
 
 <style is:global>
@@ -26,7 +27,6 @@ const projects = (await getCollection("projects")).sort(
 
   img {
     width: 20rem;
-    margin: 2rem;
   }
 
   @media screen and (max-device-width: 1000px) {
@@ -44,6 +44,7 @@ const projects = (await getCollection("projects")).sort(
   {
     projects.map((project, index) => {
       const reverse = index % 2 !== 0 ? "flex-direction: row-reverse;" : "";
+      const path = "/images/projects/" + project.id + ".png";
       return (
         <div class="project" style={reverse}>
           <div class="projectText">
@@ -52,7 +53,7 @@ const projects = (await getCollection("projects")).sort(
             </a>
             <p>{project.body}</p>
           </div>
-          <img src={"/images/" + project.data.image} alt={project.data.alt} />
+          <img src={path} alt={project.data.alt} />
         </div>
       );
     })
