@@ -1,0 +1,24 @@
+{
+  "subject": "acct:fedi@ranid.space",
+  "aliases": [
+    "https://ranid.space/blog",
+    "https://ranid.space/fedi"
+  ],
+  "links": [
+    {
+      "href": "https://ranid.space/fedi",
+      "rel": "self",
+      "type": "application/activity+json"
+    },
+    {
+      "href": "https://ranid.space/blog",
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html"
+    },
+    {
+      "rel": "http://webfinger.net/rel/avatar",
+      "type": "image/png",
+      "href": "https://ranid.space/images/avatar.png"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+/.well-known/webfinger
+  Content-Type: application/activity+json
+
+/fedi
+  Content-Type: application/activity+json
+
+/social/outbox
+  Content-Type: application/activity+json

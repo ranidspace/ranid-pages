@@ -1,0 +1,40 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1"
+  ],
+  "id": "https://ranid.space/fedi",
+  "type": "Person",
+  "following": "https://wetdry.world/users/ranidspace/following",
+  "followers": "https://wetdry.world/users/ranidspace/followers",
+  "inbox": "https://ranid.space/social/inbox",
+  "outbox": "https://ranid.space/social/outbox",
+  "preferredUsername": "fedi",
+  "name": "ranidspace",
+  "summary": "got i hate everything",
+  "url": "https://ranid.space/blog",
+  "discoverable": true,
+  "memorial": false,
+  "icon": {
+    "type": "Image",
+    "mediaType": "image/png",
+    "url": "https://ranid.space/images/avatar.png"
+  },
+  "image": {
+    "type": "Image",
+    "mediaType": "image/png",
+    "url": "https://ranid.space/images/banner.png"
+  },
+  "publicKey": {
+    "id": "https://ranid.space/fedi#main-key",
+    "owner": "https://ranid.space/fedi",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo9NKgMY3qKbkr1kfssSh\nVhtiZKzD4J4uCyKIGdN02N1DbiSglAAkEn4F2ORDuBQtU783QpdB5JCNDsPpLulS\n774CWeImzwVXb4g50DhrShTYRbLocOdvJqCySBJ+ydXTRHBGYOdgx9wdb18kJ2Bu\nMWMes2G8gywxtEqqoS/lc7mOPP/RRG8aZgEjAaBkSM3/erkuPkF6cb6I+TBKKYCj\nB3qd7x/ImfB8vT+zBT5HE+DVXwiQLKxWLsn3TYclCizOvEG9Vu02TafCBdEEPPZt\nyutaD0ofX37UwPgUGgNMhsJ3v7M5N+wFmrkwOYLhFDNY5f80aghXDdMsW1AIJtqz\naQIDAQAB\n-----END PUBLIC KEY-----"
+  },
+  "attachment": [
+    {
+      "type": "PropertyValue",
+      "name": "Website",
+      "value": "<a href=\"https://ranid.space\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">ranid.space</span><span class=\"invisible\"></span></a>"
+    }
+  ]
+}
