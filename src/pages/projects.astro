@@ -6,7 +6,6 @@ import { getCollection } from "astro:content";
 const projects = (await getCollection("projects")).sort(
   (a, b) => b.data.order - a.data.order
 );
-import ProjectImage from "@components/ProjectImage.astro";
 ---
 
 <style is:global>

@@ -9,21 +9,18 @@
  *
  * (LICENSE file should be included with script)
  */
-import type { FeedOptions, Item } from "feed";
+import type { Item } from "feed";
 import { Feed } from "feed";
 import markdownit from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { getCollection } from "astro:content";
 import { siteConfig } from "src/config";
-import type { APIRoute } from "astro";
 
 const year = +new Date().getFullYear();
 
 const markdown = markdownit("commonmark");
 
-/*
- * Main Feed Options
- */
+/* Main Feed Options */
 
 const feed = new Feed({
   title: siteConfig.title,
@@ -41,11 +38,9 @@ const feed = new Feed({
   },
 });
 
-/*
- * Build Feed From Posts
- */
+/* Build Feed From Posts */
 
-export const GET: APIRoute = async ({ site }) => {
+export async function GET() {
   // Find markdown files in blog
   const collection = await getCollection("blog");
   // Map over array of blog post files
@@ -59,7 +54,7 @@ export const GET: APIRoute = async ({ site }) => {
           .replaceAll('href="/', `href="${siteConfig.url}/`),
         { allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]) }
       );
-      const date = new Date(Date.parse(post.data.date));
+      const date = new Date(post.data.date);
       // Return data + add extra fields
       return {
         title: post.data.title,
@@ -81,4 +76,4 @@ export const GET: APIRoute = async ({ site }) => {
   // Write output file
   return new Response(feed.atom1());
   // Show cli stats
-};
+}

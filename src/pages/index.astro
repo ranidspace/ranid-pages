@@ -1,12 +1,6 @@
 ---
 const title = "Ranid Website";
 import Default from "@layouts/Default.astro";
-import { getCollection } from "astro:content";
-const posts = (await getCollection("blog")).sort(
-  (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date)
-);
-import markdownit from "markdown-it";
-const md = markdownit("commonmark");
 ---
 
 <style>

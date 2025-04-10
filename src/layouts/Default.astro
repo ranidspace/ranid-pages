@@ -3,14 +3,19 @@ import Header from "@components/Header.astro";
 import Nav from "@components/Nav.astro";
 import "../styles/style.css";
 
-const { pageTitle, description } = Astro.props;
+export interface Props {
+  pageTitle: string;
+  description?: string;
+  type?: string;
+}
+const { pageTitle, description, type = "website" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <Header pageTitle={pageTitle} description={description} />
-    <meta name="og:type" content="website" />
+    <meta name="og:type" content={type} />
   </head>
 
   <body>
