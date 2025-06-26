@@ -9,16 +9,22 @@
  *
  * (LICENSE file should be included with script)
  */
+
+import { getCollection } from "astro:content";
 import type { Item } from "feed";
 import { Feed } from "feed";
-import markdownit from "markdown-it";
-import sanitizeHtml from "sanitize-html";
-import { getCollection } from "astro:content";
+import rehypePresetMinify from "rehype-preset-minify";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import remarkSmartypants from "remark-smartypants";
 import { siteConfig } from "src/config";
+import { unified } from "unified";
 
 const year = +new Date().getFullYear();
-
-const markdown = markdownit("commonmark");
 
 /* Main Feed Options */
 
@@ -47,13 +53,39 @@ export async function GET() {
   const posts: any[] = await Promise.all(
     collection.map(async (post) => {
       // Generate excerpt from content
-      const excerpt = sanitizeHtml(
-        markdown
-          .render(post.body)
-          .replaceAll('src="/', `src="${siteConfig.url}/`)
-          .replaceAll('href="/', `href="${siteConfig.url}/`),
-        { allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]) }
-      );
+      const content = await unified()
+        .use(remarkParse)
+        .use(remarkGfm)
+        .use(remarkSmartypants)
+        .use(remarkRehype, {
+          allowDangerousHtml: true,
+          passThrough: [],
+        })
+        .use(rehypeRaw)
+        .use(rehypeSanitize, {
+          ...defaultSchema,
+          tagNames: [...defaultSchema.tagNames, "small"],
+          attributes: {
+            ...defaultSchema.attributes,
+            ol: [["reversed"]],
+          },
+        })
+        .use(rehypePresetMinify)
+        .use(rehypeStringify, {
+          characterReferences: {
+            omitOptionalSemicolons: false,
+          },
+        })
+        .process(post.body);
+      const excerpt = String(content)
+        .replaceAll('src="/', `src="${siteConfig.url}/`)
+        .replaceAll('href="/', `href="${siteConfig.url}/`);
+
+      // const excerpt = sanitizeHtml(
+      //   markdown
+      //     .render(post.body)
+      //   { allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]) },
+      // );
       const date = new Date(post.data.date);
       // Return data + add extra fields
       return {
@@ -67,13 +99,12 @@ export async function GET() {
         description: "",
         content: excerpt,
       };
-    })
+    }),
   );
   // Sort posts
   posts.sort((a, b) => +new Date(b.date) - +new Date(a.date));
   // Add post items
   posts.forEach((item: Item) => feed.addItem(item));
   // Write output file
-  return new Response(feed.atom1());
-  // Show cli stats
+  return new Response(`${feed.atom1()}\n`);
 }
