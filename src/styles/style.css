@@ -128,8 +128,7 @@ table {
 table,
 th,
 td {
-  padding-left: 24px;
-  padding-right: 6px;
+  padding-inline: 6px;
   border: 1px solid;
 }
 
