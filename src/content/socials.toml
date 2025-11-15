@@ -1,0 +1,24 @@
+[Github]
+link = "https://github.com/ranidspace"
+icon = "github.svg"
+
+[Tumblr]
+link = "https://ranidspace.tumblr.com"
+icon = "tumblr.svg"
+
+[Youtube]
+link = "/feed.atom"
+icon = "youtube.svg"
+
+[Fediverse]
+link = "https://wetdry.world/@ranidspace/"
+icon = "fediverse.svg"
+
+[Bluesky]
+link = "https://bsky.app/profile/ranid.space/"
+icon = "bluesky.svg"
+
+[AtomFeed]
+title = "Atom(RSS) feed"
+link = "/feed.atom"
+icon = "rss.svg"

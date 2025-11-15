@@ -1,0 +1,19 @@
+[ridley]
+name = "doomhardy"
+link = "https://doomhardy.neocities.org"
+text = "very cool site... yummy site... yummm"
+
+[lise]
+name = "Lise's silly lil' homepage"
+link = "https://wii.gay/"
+rawtext = true
+text = """
+<hr />
+<p>guys please help im trapped in this website you've gotta save me i can only
+communicate through this random faggot's preview window send help</p>
+"""
+
+[gira]
+name = "giraffeyla10"
+link = "https://giraffeyla10.neocities.org/"
+text = "nya :3"

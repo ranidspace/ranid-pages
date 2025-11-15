@@ -1,0 +1,47 @@
+[bfres]
+title = "Blender BFRES Importer"
+link = "https://github.com/ranidspace/BlenderBfresImporter"
+alt = "A Blender screenshot of Harmony from Splatoon"
+description = """
+I was fed up of spending ages ripping 3D models from Switch Toolbox and then
+importing them into blender and it would often be bad and require a lot of
+extra work, so I was fed up and just made a Blender Importer for BFRES files."""
+
+[gearcheck]
+title = "Splatoon 3 Gear Completion Checker"
+link = "/gearcheck"
+alt = "a grid of various labelled splatoon 3 clothing"
+description = """
+my first attempt at javascript in web design to make an easy to use web app to
+check all of the gear you own in the video game splatoon 3. well the app is
+easy to use it's just getting the file to upload there. i also attempted to
+make the site look good on mobile as well! so check it out on your phone."""
+
+[gamefiles]
+title = "splatoongamefiles"
+link = "https://liquidcrystalsky.tumblr.com"
+alt = "A tumblr profile for 'splatoongamefiles' the title of the blog is 'Forever trapped in Switch Tooblox'"
+description = """
+A blog I ran where I would rip files from Splatoon (wild). Eventually turned
+into a more general splatoon blog. I'm hoping to make a site where I can upload
+easily searchable model files, similar to VG resource but just for splatoon
+stuff."""
+
+[transpack]
+title = "Trans Pack (No longer maintained)"
+link = "https://www.planetminecraft.com/texture-pack/trans-texture-pack/"
+alt = "A minecraft screenshot with various items coloured with the transgender flag"
+description = """
+A minecraft resource pack dedicated to recolouring a bunch of blocks and items
+to be transgender pride coloured. Also includes many other pride themed items.
+Feel free to fork it and update it for newer versions, make sure to credit me."""
+
+[letterboxd]
+title = "Every Movie I've Ever Watched"
+link = "https://letterboxd.com/lazygott/"
+alt = "The letterboxd logo"
+description = """
+Basically just my letterboxd profile. It took a long ass time to compile this
+so I'm counting it as a project. I also dont have enough projects to put here.
+Not all of these have reviews or even ratings. I am generally bad at rating
+things."""

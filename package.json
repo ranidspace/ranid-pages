@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/ts-plugin": "^1.10.4",
-    "astro": "^5.6.1",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/ts-plugin": "^1.10.5",
+    "astro": "^5.15.7",
     "feed": "^4.2.2",
     "rehype-preset-minify": "^7.0.1",
     "rehype-raw": "^7.0.0",
@@ -23,12 +23,12 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "remark-smartypants": "^3.0.2",
-    "typescript": "^5.8.3",
-    "unified": "^11.0.5",
-    "wrangler": "^4.42.0"
+    "typescript": "^5.9.3",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
-    "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "wrangler": "^4.47.0"
   }
 }

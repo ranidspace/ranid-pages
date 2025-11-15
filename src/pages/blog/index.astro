@@ -16,47 +16,61 @@ import { unified } from "unified";
 ---
 
 <Default pageTitle={title}>
-  {
-    posts.map(async (post) => {
-      const split = post.body.split("<!--more-->");
-      const excerpt = String(
-        await unified()
-          .use(remarkParse)
-          .use(remarkGfm)
-          .use(remarkRehype, { allowDangerousHtml: true })
-          .use(rehypeRaw)
-          .use(rehypeSanitize, {
-            ...defaultSchema,
-            tagNames: [...defaultSchema.tagNames, "small"],
-            attributes: {
-              ...defaultSchema.attributes,
-              ol: [["reversed"]],
-            },
-          })
-          .use(rehypeStringify)
-          .process(split[0])
-      );
-      const link = "/blog/" + post.id;
-      return (
-        <div class="blogpost">
-          <h4>
-            <a href={link}>{post.data.title}</a>
-          </h4>
-          <h5>
-            {post.data.date.toLocaleString("en-CA", {
-              dateStyle: "short",
-              timeStyle: "short",
-            })}
-          </h5>
-          {post.data.updated && <h5>Updated {post.data.updated}</h5>}
-          <Fragment set:html={excerpt} />
-          {split[1] && (
-            <p>
-              <a href={link}>[View full post]</a>
-            </p>
-          )}
-        </div>
-      );
-    })
-  }
+  <ul class="contentlist">
+    {
+      posts.map(async (post) => {
+        const split = post.body.split("<!--more-->");
+        const excerpt = String(
+          await unified()
+            .use(remarkParse)
+            .use(remarkGfm)
+            .use(remarkRehype, { allowDangerousHtml: true })
+            .use(rehypeRaw)
+            .use(rehypeSanitize, {
+              ...defaultSchema,
+              tagNames: [...defaultSchema.tagNames, "small"],
+              attributes: {
+                ...defaultSchema.attributes,
+                ol: [["reversed"]],
+              },
+            })
+            .use(rehypeStringify)
+            .process(split[0])
+        );
+        const link = "/blog/" + post.id;
+        const datestring = post.data.updated
+          ? post.data.updated.toLocaleDateString("en-CA")
+          : "";
+        return (
+          <li class="blogpost">
+            <hgroup>
+              <h2 class="blogtitle">
+                <a href={link}>{post.data.title}</a>
+              </h2>
+              <p class="postdate">
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleString("en-CA", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                    timeZone: "America/Toronto",
+                  })}
+                </time>
+              </p>
+            </hgroup>
+            {post.data.updated && (
+              <p class="postdate">
+                Updated <time datetime={datestring}>{datestring}</time>
+              </p>
+            )}
+            <Fragment set:html={excerpt} />
+            {split[1] && (
+              <p>
+                <a href={link}>[View full post]</a>
+              </p>
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
 </Default>

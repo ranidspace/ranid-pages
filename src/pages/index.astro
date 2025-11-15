@@ -1,14 +1,12 @@
 ---
 const title = "Ranid Website";
 import Default from "@layouts/Default.astro";
+
+import { getCollection, render } from "astro:content";
+const socials = await getCollection("socials");
 ---
 
 <style>
-  .content-box {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
   .info-flex {
     display: flex;
     flex-wrap: wrap;
@@ -20,7 +18,6 @@ import Default from "@layouts/Default.astro";
   }
 
   .info-text {
-    display: block;
     text-align: justify;
     padding: 0;
     max-width: 35rem;
@@ -29,80 +26,90 @@ import Default from "@layouts/Default.astro";
   .media-list {
     display: block;
     min-width: 18rem;
+    font-style: normal;
+  }
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+  }
+  .social > img {
+    height: 0.9lh;
+    width: 1.5em;
   }
 
   .media-list-mobile {
     display: none;
-    width: 60%;
+    width: 80%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
 
   .media-list-mobile img {
-    width: 5rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 
   @media screen and (max-device-width: 1000px) {
     .info-flex {
       flex-direction: column;
-      margin: 0;
+      gap: 3em;
+      margin: 3em 0;
     }
 
     .info-text {
-      display: block;
-      margin: 3rem auto;
-      padding: 0;
       max-width: none;
     }
 
     .media-list {
       display: none;
     }
-
     .media-list-mobile {
       display: flex;
-      margin-bottom: 5rem;
     }
   }
 </style>
 
 <Default pageTitle={title}>
-  <div class="info-flex">
-    <div class="info-text">
+  <article class="info-flex">
+    <p class="info-text">
       Hey this is Audrey (They/It/Xe), also known as ranidspace. I'm into
       computer science, astronomy, video games, 3D art, and whatever I feel
       like at the time. I'm not good at graphic design so this website may look
       a little ass but I'm hoping to improve as I continue to work on it.
-    </div>
-    <div class="media-list-mobile">
-      <a href="https://github.com/ranidspace">
-        <img src="/images/icons/github.svg" />
-      </a>
-      <a href="https://www.youtube.com/@ranidspace">
-        <img src="/images/icons/youtube.svg" />
-      </a>
-      <a href="/feed.atom">
-        <img src="/images/icons/rss.svg" />
-      </a>
-    </div>
+    </p>
+    <address class="media-list-mobile">
+      {
+        socials.map(async (social) => {
+          await render(social);
+          const iconPath = "/images/icons/" + social.data.icon;
+          return (
+            <a href={social.data.link}>
+              <img src={iconPath} />
+            </a>
+          );
+        })
+      }
+    </address>
 
-    <div class="media-list">
+    <address class="media-list">
       Find me here:
-      <ul>
-        <li>
-          Github:
-          <a href="https://github.com/ranidspace">ranidspace</a>
-        </li>
-        <li>
-          Youtube:
-          <a href="https://www.youtube.com/@ranidspace">ranidspace</a>
-        </li>
-        <li>
-          Atom feed (for the blog):
-          <a href="/feed.atom">feed.atom</a>
-        </li>
+      <ul class="contentlist">
+        {
+          socials.map(async (social) => {
+            await render(social);
+            const iconPath = "/images/icons/" + social.data.icon;
+            return (
+              <li class="social">
+                <img width="24" height="24" src={iconPath} />
+                <a href={social.data.link}>{social.data.title ?? social.id}</a>
+              </li>
+            );
+          })
+        }
       </ul>
-    </div>
-  </div>
+    </address>
+  </article>
 </Default>

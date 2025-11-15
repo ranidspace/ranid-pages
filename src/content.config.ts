@@ -1,26 +1,42 @@
 import { defineCollection, z } from "astro:content";
 
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/pages/blog" }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    updated: z.coerce.string().date().optional(),
+    updated: z.coerce.date().optional(),
   }),
 });
 const friends = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/friends" }),
+  loader: file("./src/content/friends.toml"),
   schema: z.object({
     name: z.string(),
-    link: z.string(),
-    order: z.number(),
+    link: z.string().url(),
+    rawtext: z.boolean().default(false),
+    text: z.string(),
   }),
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/projects" }),
+  loader: file("./src/content/projects.toml"),
+  schema: z.object({
+    title: z.string(),
+    link: z.union([z.string().url(), z.string().startsWith("/")]),
+    description: z.string(),
+    alt: z.string(),
+  }),
 });
 
-export const collections = { blog, friends, projects };
+const socials = defineCollection({
+  loader: file("./src/content/socials.toml"),
+  schema: z.object({
+    link: z.union([z.string().url(), z.string().startsWith("/")]),
+    icon: z.string(),
+    title: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, friends, projects, socials };

@@ -91,9 +91,7 @@ export async function GET() {
       return {
         title: post.data.title,
         published: date,
-        date: post.data.updated
-          ? new Date(Date.parse(post.data.updated))
-          : date,
+        date: post.data.updated ? post.data.updated : date,
         id: siteConfig.url + "/blog/" + post.id,
         link: siteConfig.url + "/blog/" + post.id,
         description: "",

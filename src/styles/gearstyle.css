@@ -160,4 +160,3 @@ a:focus {
 .toggle[open] > .lbl-toggle::after {
   transform: rotate(90deg) translate(3px, -5px);
 }
-

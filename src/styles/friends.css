@@ -1,3 +1,28 @@
+@font-face {
+  font-family: "pixter-granularregular";
+  src: url("https://raw.githubusercontent.com/csd-was-taken/Webbed-Site/refs/heads/main/font/pixter_granular-webfont.woff2")
+    format("woff2");
+  src: url("https://raw.githubusercontent.com/csd-was-taken/Webbed-Site/refs/heads/main/font/pixter_granular-webfont.woff")
+    format("woff");
+}
+
+@font-face {
+  font-family: "Da Bomb";
+  src: url("/fonts/DaBomb.woff2") format("woff2");
+  src: url("/fonts/DaBomb.otf") format("opentype");
+}
+@font-face {
+  font-family: "Depixel";
+  src: url("/fonts/depixelschmal.woff2") format("woff2");
+  src: url("/fonts/depixelschmal.woff") format("woff");
+}
+
+@font-face {
+  font-family: "fontstuck";
+  src: url("/fonts/fontstuck-extended.woff2") format("woff2");
+  src: url("/fonts/fontstuck-extended.otf") format("opentype");
+}
+
 .friend {
   display: block;
   box-sizing: border-box;
@@ -7,26 +32,27 @@
   text-align: center;
 }
 
-@font-face {
-  font-family: "pixter-granularregular";
-  src: url("https://raw.githubusercontent.com/csd-was-taken/Webbed-Site/refs/heads/main/font/pixter_granular-webfont.woff2")
-    format("woff2");
-  src: url("https://raw.githubusercontent.com/csd-was-taken/Webbed-Site/refs/heads/main/font/pixter_granular-webfont.woff")
-    format("woff");
+.friend h2 {
+  line-height: normal;
+  font-size: 2.25em;
+}
+.friend p {
+  margin: 0.5em;
+}
+.friend a {
+  font-family: inherit;
 }
 
 .lise {
   background-color: #b886f5;
-  font-family: "pixter-granularregular";
+  font-family: "pixter-granularregular", monospace;
   cursor:
     url("https://raw.githubusercontent.com/csd-was-taken/Webbed-Site/refs/heads/main/cursors/wii-pointer-ccw.cur"),
     auto;
 }
 
-.lise h1 {
-  margin-top: 5px;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  text-align: center;
+.lise h2 {
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
 }
 
 .lise hr {
@@ -34,23 +60,15 @@
   width: 90%;
 }
 
-.lise p {
-  font-size: 1em;
-  margin: 0.1em 1em;
-}
-
 .lise a {
   font-size: 1em;
   color: rgb(91, 206, 250);
   text-decoration: none;
-  font-family: "pixter-granularregular";
 }
-
 .lise a:visited {
   color: rgb(115, 0, 255);
   text-decoration: none;
 }
-
 .lise a:hover {
   color: rgba(0, 0, 0, 0);
   text-decoration: underline;
@@ -59,12 +77,8 @@
     auto;
 }
 
-@font-face {
-  font-family: "Da Bomb";
-  src: url("/fonts/DABOMB__.TTF") format("truetype");
-}
-
-.doomhardy {
+.ridley {
+  font-family: "Depixel", monospace;
   background: linear-gradient(
     0deg,
     rgba(2, 0, 36, 1) 0%,
@@ -76,31 +90,15 @@
   color: #fdd3ad;
 }
 
-.doomhardy h1 {
-  font-size: 2em;
-  font-family: "Da Bomb";
+.ridley h2 {
+  font-family: "Da Bomb", sans-serif;
 }
 
-.doomhardy p {
-  text-align: center;
-  font-size: 1em;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-  margin: 4pt 0;
-}
-
-.doomhardy a {
-  font-size: 1em;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+.ridley a {
   color: #add7fd;
 }
-
-.doomhardy a:visited {
+.ridley a:visited {
   color: #d3adfd;
-}
-
-@font-face {
-  font-family: "fontstuck";
-  src: url("/fonts/fontstuck-extended.otf") format("opentype");
 }
 
 .gira {
@@ -113,18 +111,11 @@
   border-color: #5d8811 #223500 #223500 #5d8811;
 }
 
-.gira h1 {
+.gira h2 {
   font-family: "fontstuck", "Courier New", Courier, monospace;
-  font-size: 30pt;
-}
-
-.gira p {
-  margin: 4pt 0;
 }
 
 .gira a {
-  font-family: sans-serif;
-  font-size: 0.9em;
   color: #4f0099;
   font-weight: bold;
   text-decoration: none;

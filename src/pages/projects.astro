@@ -3,9 +3,7 @@ const pageTitle = "Ranid Projects";
 const desc = "My beloved projects";
 import Default from "@layouts/Default.astro";
 import { getCollection } from "astro:content";
-const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.order - a.data.order
-);
+const projects = await getCollection("projects");
 ---
 
 <style is:global>
@@ -19,9 +17,8 @@ const projects = (await getCollection("projects")).sort(
     flex-direction: row;
     align-items: center;
   }
-
   .projectText {
-    padding: 30px;
+    padding: 2em;
   }
 
   img {
@@ -30,7 +27,10 @@ const projects = (await getCollection("projects")).sort(
 
   @media screen and (max-device-width: 1000px) {
     .project {
-      align-items: flex-start;
+      flex-direction: column !important;
+    }
+    .projectText {
+      padding: 0;
     }
 
     img {
@@ -40,21 +40,23 @@ const projects = (await getCollection("projects")).sort(
 </style>
 
 <Default pageTitle={pageTitle} description={desc}>
-  {
-    projects.map((project, index) => {
-      const reverse = index % 2 !== 0 ? "flex-direction: row-reverse;" : "";
-      const path = "/images/projects/" + project.id + ".png";
-      return (
-        <div class="project" style={reverse}>
-          <div class="projectText">
-            <a href={project.data.link}>
-              <h2>{project.data.title}</h2>
-            </a>
-            <p>{project.body}</p>
-          </div>
-          <img src={path} alt={project.data.alt} />
-        </div>
-      );
-    })
-  }
+  <ul class="contentlist">
+    {
+      projects.map((project, index) => {
+        const reverse = index % 2 !== 1 ? "flex-direction: row-reverse;" : "";
+        const path = "/images/projects/" + project.id + ".png";
+        return (
+          <li class="project" style={reverse}>
+            <img src={path} alt={project.data.alt} />
+            <div class="projectText">
+              <a href={project.data.link}>
+                <h2>{project.data.title}</h2>
+              </a>
+              <p>{project.data.description}</p>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
 </Default>

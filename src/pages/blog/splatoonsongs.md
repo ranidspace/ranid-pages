@@ -30,7 +30,7 @@ tables. This is currently being stored as a markdown table and it's dumb. But
 [here's the raw CSV anyway](/songpoll.csv)
 
 | Place |                                   Title                                    |              Artist               | Wins| Losses | % Won |
-|------:|----------------------------------------------------------------------------|-----------------------------------|-----|-------:|------:|
+|------:|----------------------------------------------------------------------------|-----------------------------------|----:|-------:|------:|
 | 1     | Fly Octo Fly - Ebb & Flow (Octo)                                           | Off the Hook                      | 170 | 15     | 91.89 |
 | 2     | Into the Light                                                             | Off the Hook                      | 188 | 20     | 90.38 |
 | 3     | Nasty Majesty                                                              | Off the Hook                      | 138 | 24     | 85.19 |
