@@ -108,6 +108,12 @@ img {
   object-fit: contain;
 }
 
+.edit {
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
 code {
   font-family: "Martian Mono", monospace;
   background-color: #d7cfbc;
@@ -121,13 +127,15 @@ table {
   max-width: 100%;
   margin: auto;
 }
-
+th {
+  text-align: left;
+  white-space: nowrap;
+}
 th,
 td {
   padding-inline: 0.375em;
   border: 1px solid;
 }
-
 /* right aligned are usually numbers */
 td[align="right"] {
   font-family: "Martian Mono", monospace;
@@ -145,8 +153,5 @@ td[align="right"] {
   }
   table {
     font-size: 0.6em;
-  }
-  th {
-    white-space: nowrap;
   }
 }

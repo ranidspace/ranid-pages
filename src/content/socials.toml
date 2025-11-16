@@ -7,7 +7,7 @@ link = "https://ranidspace.tumblr.com"
 icon = "tumblr.svg"
 
 [Youtube]
-link = "/feed.atom"
+link = "https://www.youtube.com/@ranidspace"
 icon = "youtube.svg"
 
 [Fediverse]

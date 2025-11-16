@@ -5,7 +5,6 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
-import rehypePresetMinify from "rehype-preset-minify";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
@@ -19,7 +18,7 @@ import { unified } from "unified";
   <ul class="contentlist">
     {
       posts.map(async (post) => {
-        const split = post.body.split("<!--more-->");
+        const split = post.body.split(/<!--more-->|\{\/\*more\*\/\}/);
         const excerpt = String(
           await unified()
             .use(remarkParse)
@@ -32,6 +31,7 @@ import { unified } from "unified";
               attributes: {
                 ...defaultSchema.attributes,
                 ol: [["reversed"]],
+                ins: ["className", ["edit"]],
               },
             })
             .use(rehypeStringify)

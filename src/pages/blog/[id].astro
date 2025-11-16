@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from "astro:content";
+import Default from "@layouts/Default.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const postDate = post.data.date.toLocaleString("en-CA", {
+  dateStyle: "short",
+  timeStyle: "short",
+});
+const isoDate = post.data.date.toISOString();
+const isoUpdate = post.data.updated ? post.data.updated.toDateString() : "";
+const desc = post.body.trim().split("\n\n")[0].replaceAll("\n", " ");
+---
+
+<Default pageTitle={post.data.title} description={desc} type="article">
+  <article>
+    <hgroup>
+      <h2 class="blogtitle">{post.data.title}</h2>
+      <p class="postdate"><time datetime={isoDate}>{postDate}</time></p>
+      {
+        post.data.updated && (
+          <p class="postdate">
+            Updated{" "}
+            <time datetime={isoUpdate}>
+              {post.data.updated.toLocaleDateString("en-CA")}
+            </time>
+          </p>
+        )
+      }
+    </hgroup>
+
+    <Content />
+  </article>
+</Default>

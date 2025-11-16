@@ -19,9 +19,11 @@ extensions:
 [Ublock Origin](https://addons.mozilla.org/en-CA/firefox/addon/ublock-origin/),
 [LocalCDN](https://addons.mozilla.org/en-CA/firefox/addon/localcdn-fork-of-decentraleyes/).
 
-<small>Edit as of 2024-01-02: <br /> Turns out that LocalCDN is ALSO not
-needed, and is covered by Ublock origin. i've been wanting to put this here for
-a while but i only did it now.</small>
+<ins class="edit" datetime="2024-01-02">
+    2024-01-02 Update: <br /> Turns out that LocalCDN is ALSO not needed,
+    and is covered by Ublock origin. i've been wanting to put this here for a
+    while but i only did it now.
+</ins>
 
 This list was actually a lot longer. I then later found out that a bunch of
 extensions I used were reduntant or very old. LocalCDN is just a fork of

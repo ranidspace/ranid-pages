@@ -1,0 +1,62 @@
+---
+import fs from "fs";
+import { parse } from "csv-parse";
+import { finished } from "stream/promises";
+
+export interface Props {
+  filePath: string;
+  alignRight?: string[];
+}
+
+async function processFile(path: string) {
+  const records = [];
+  const parser = fs.createReadStream(path).pipe(
+    parse({
+      columns: true,
+    })
+  );
+  parser.on("readable", function () {
+    var record;
+    while ((record = parser.read()) !== null) {
+      // Work with each record
+      records.push(record);
+    }
+  });
+  await finished(parser);
+  return records;
+}
+
+const { filePath, alignRight } = Astro.props;
+const data = await processFile(filePath);
+---
+
+<table>
+  <tr>
+    {
+      Object.keys(data[0]).map((key) => {
+        var output: string;
+        if (alignRight && alignRight.includes(key)) {
+          output = <th align="right">{key}</th>;
+        } else {
+          output = <th>{key}</th>;
+        }
+        return output;
+      })
+    }
+  </tr>
+  {
+    data.map((record) => (
+      <tr>
+        {Object.keys(record).map((key) => {
+          var output;
+          if (alignRight && alignRight.includes(key)) {
+            output = <td align="right">{record[key]}</td>;
+          } else {
+            output = <td>{record[key]}</td>;
+          }
+          return output;
+        })}
+      </tr>
+    ))
+  }
+</table>

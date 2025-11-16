@@ -29,7 +29,7 @@ on it. It wasn't too hard to get around, I just stole access to my [friend
 Lise's](https://wii.gay) server box, which I used to host the backend for this
 project.
 
-#### Bunch of stuff sucked
+### Bunch of stuff sucked
 
 First mistake, I should have hosted both the backend _and_ frontend for it on
 the same server. When I published it I quickly noticed it didn't work for
@@ -73,7 +73,7 @@ The numbers are ranked by the percent of matches they won.
 With 2619 votes, each number should have showed up in 52 matches. 58 was in the
 lowest number of matches, only in 37, and the highest was 49, which was in 73.
 
-#### Okay okay for real here's numbers:
+### Okay okay for real here's numbers:
 
 The number which did the worst was 79, winning only 27% of the time. The rest
 of the bottom five is 47, 29, 61, and 41. Pretty unremarkable numbers! JUST
@@ -95,7 +95,7 @@ Though the repdigit numbers (11, 22, 33, etc.) are a little interesting. The
 lowest ranked was actually 44, I can't really see why, but I guess it means all
 of them are liked? Third place out of these was 88 though, get real.
 
-#### OKAY. Okay, here's the top 10
+### OKAY. Okay, here's the top 10
 
 <!-- Why write anything in markdown when you're gonna have to write it in html
 anyway because it can't fucking do reversed lists-->
