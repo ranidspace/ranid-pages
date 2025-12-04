@@ -1,0 +1,157 @@
+@font-face {
+  font-family: Martian Grotesk;
+  font-display: swap;
+  src: url("/fonts/MartianGrotesk-StdRg.woff2") format("woff2");
+  font-weight: 400 500; /* Th: 100, xLt: 200, Lt: 300, Rg: 400, Md: 500, (no 600), Bd: 700, xBd: 800 */
+}
+
+@font-face {
+  font-family: Martian Grotesk;
+  font-display: swap;
+  src: url("/fonts/MartianGrotesk-StdMd.woff2") format("woff2");
+  font-weight: 700; /* Th: 100, xLt: 200, Lt: 300, Rg: 400, Md: 500, (no 600), Bd: 700, xBd: 800 */
+}
+
+@font-face {
+  font-family: "Martian Mono";
+  font-display: swap;
+  src: url("/fonts/MartianMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Martian Mono";
+  src: url("/fonts/MartianMono-Bold.woff2") format("woff2");
+  font-weight: bold;
+}
+
+:root {
+  --color-bg: #fff8e7;
+  --color-hr: #808080;
+  --color-text: black;
+}
+
+body {
+  background-color: #224b34;
+  color: var(--color-text);
+  font-family: "Martian Grotesk", sans-serif;
+  line-height: 1.5;
+}
+
+p {
+  margin-block: 1lh;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  font-family: "Martian Mono", monospace;
+}
+.blogtitle {
+  font-size: 1.25em;
+  text-align: left;
+}
+.postdate {
+  font-family: "Martian Mono", monospace;
+  margin-block: 0;
+  font-weight: 700;
+}
+
+h1,
+h2 {
+  text-decoration: none;
+  margin: 0;
+}
+
+.content-box {
+  max-width: 68rem;
+  padding: 1em;
+  margin: 1.5em auto 0.8em;
+  background-color: var(--color-bg);
+}
+
+nav {
+  text-align: center;
+  margin: 0;
+}
+
+.contentlist {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.blogpost {
+  margin-top: 1em;
+  padding-top: 0.5em;
+}
+
+.blogpost ~ .blogpost {
+  border-top: 2px solid var(--color-hr);
+}
+
+.blogpost p {
+  text-align: justify;
+}
+
+a {
+  font-family: "Martian Mono", monospace;
+  color: #0d2fff;
+}
+
+a:active {
+  color: #fff;
+  background-color: #000;
+}
+
+img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.edit {
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+code {
+  font-family: "Martian Mono", monospace;
+  background-color: #d7cfbc;
+  padding: 2pt;
+  border-radius: 2pt;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 50%;
+  max-width: 100%;
+  margin: auto;
+}
+th {
+  text-align: left;
+  white-space: nowrap;
+}
+th,
+td {
+  padding-inline: 0.375em;
+  border: 1px solid;
+}
+/* right aligned are usually numbers */
+td[align="right"] {
+  font-family: "Martian Mono", monospace;
+}
+
+@media screen and (max-width: 570px) {
+  body {
+    margin: 0.3rem;
+  }
+  .content-box {
+    max-width: none;
+    padding: 0.8em;
+    margin: 0.5em auto 0.8em;
+    background-color: var(--color-bg);
+  }
+  table {
+    font-size: 0.6em;
+  }
+}

@@ -1,0 +1,8 @@
+baseURL = 'https://ranid.space/'
+languageCode = 'en_CA'
+title = 'The Ranid Space'
+timeZone = 'America/Toronto'
+[params]
+    description = "Personal website/blog for me, ranidspace. hi."
+[params.author]
+    name = "ranidspace"

@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <article>
+    <hgroup>
+      <h2 class="blogtitle">{{ .Title }}</h2>
+      <p class="postdate"><time datetime={{.Date}}>{{ .Date | time.Format "2006-01-02 03:04 PM" }}</time></p>
+      {{ if not (eq .Lastmod .Date) }}
+          <p class="postdate">
+          <time datetime={{ .Lastmod }}>
+              Updated {{ .Lastmod | time.Format "2006-01-02" }}
+            </time>
+          </p>
+      {{ end }}
+    </hgroup>
+
+    {{ .Content }}
+  </article>
+{{ end }}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ .Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ if .Description }}
+    <meta name="description" content="{{ .description }}" />
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    {{ end }}
+    <meta name="author" content="{{ .Site.Params.author.name }}" />
+    {{/*
+    <meta name="canonical" content="{{ .CanonUrl }}" />
+    */}}
+    <meta name="og:title" content="{{ .Title }}" />
+    {{ if .Description }}
+    <meta name="og:description" content="{{ .Description }}" />
+    {{ else }}
+    <meta name="og:description" content="{{ .Site.Params.Description }}" />
+    {{ end }} {{/*
+    <meta name="og:url" content="{{ .canonUrl }}" />
+    */}}
+    <meta name="og:site_name" content="{{ .Site.Title }}" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.atom" />
+    {{ $style := resources.Get "styles/style.css" | resources.Minify |
+    resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+  </head>
+
+  <body>
+    <div class="content-box">
+      <header>
+        <h1>Ranid's Space</h1>
+        <nav>
+          <a href="/">Main</a> | <a href="/blog">Blog</a> |
+          <a href="/projects">Projects</a> | <a href="/art">Art</a> |
+          <a href="https://doomhardy.neocities.org" rel="external"
+            >Partner Site</a
+          >
+        </nav>
+      </header>
+
+      <hr />
+
+      {{ block "main" . }}
+      {{ end }}
+    </div>
+  </body>
+</html>

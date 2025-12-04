@@ -1,0 +1,19 @@
+{{ define "main" }}
+<ul class="contentlist">
+  {{ range .Paginator.Pages }}
+  <li class="blogpost">
+    <hgroup>
+      <h2 class="blogtitle">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+    </hgroup>
+    {{ .Summary }}
+    {{ if .Truncated }}
+    <p>
+      <a href="{{.RelPermalink}}">[View full post]</a>
+    </p>
+    {{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
