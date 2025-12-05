@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8">
+    <title>Splatoon 3 Gear Completion Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{- with .Resources.Get "gearchecker.js" | minify | fingerprint -}}
+      <script src="{{ .RelPermalink }}"></script>
+    {{ end }}
+
+    {{- $style := resources.Get "styles/gearstyle.css" | resources.Minify |
+      resources.Fingerprint
+    }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ block "style" . }}
+    {{ end }}
+  </head>
+  {{ .Content }}
+
+  <body onload="loadpage()"></body>
+</html>

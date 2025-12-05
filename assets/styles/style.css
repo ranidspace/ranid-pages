@@ -137,7 +137,7 @@ td {
   border: 1px solid;
 }
 /* right aligned are usually numbers */
-td[align="right"] {
+td[style="text-align: right"] {
   font-family: "Martian Mono", monospace;
 }
 

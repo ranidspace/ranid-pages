@@ -1,0 +1,29 @@
+{{ $partialName := "minify.html" }}
+{{ $result := "" }}
+
+{{ $text := or .text "" }}
+{{ $format := or .format "html" }}
+{{ $supportedFormats := slice
+  "css"
+  "html"
+  "js"
+  "json"
+  "svg"
+  "xml"
+}}
+
+{{ if in $supportedFormats $format }}
+  {{ with $.text }}
+    {{ $cacheKey := printf "%s.%s" (hash.XxHash .) $format }}
+    {{ with resources.FromString $cacheKey . }}
+      {{ with . | resources.Minify }}
+        {{ $result = replace .Content "src=/" (printf "src=%s" (absURL "")) }}
+        {{ $result = replace $result "href=/" (printf "href=%s" (absURL "")) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ errorf "The %q partial does not support the %q format." $partialName $format }}
+{{ end }}
+
+{{ return $result }}

@@ -1,16 +1,16 @@
-{{ if eq (.Get 0) "mobile" }}
-    {{ range .Site.Data.socials }}
-      <a href={{ .link }}>
-        <img src="{{printf "images/icons/%s" .icon }}" />
-      </a>
-    {{ end }}
-{{else}}
-<ul class="contentlist">
-  {{ range .Site.Data.socials }}
-  <li class="social">
-    <img width="24" height="24" src="{{printf "images/icons/%s" .icon }}" />
-    <a href="{{.link}}">{{ .name }}</a>
-  </li>
-  {{end}}
-</ul>
-{{end}}
+{{- if eq (.Get 0) "mobile" }}
+  {{- range .Site.Data.socials }}
+    <a href="{{ .link }}">
+      <img src="{{ printf "images/icons/%s" .icon }}" alt="">
+    </a>
+  {{- end -}}
+{{- else }}
+  <ul class="contentlist">
+    {{ range .Site.Data.socials -}}
+    <li class="social">
+      <img width="24" height="24" src="{{ printf "images/icons/%s" .icon }}" alt="">
+      <a href="{{ .link }}">{{ .name }}</a>
+    </li>
+    {{ end -}}
+  </ul>
+{{- end }}

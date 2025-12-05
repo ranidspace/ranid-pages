@@ -1,0 +1,46 @@
+{{ printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }} {{/* ref: https://validator.w3.org/feed/docs/atom.html */}}
+<feed xml:lang="{{ site.LanguageCode }}" xmlns="http://www.w3.org/2005/Atom">
+  <id>{{ .Permalink }}</id>
+  <title>{{site.Title}}</title>
+  <updated>{{ now.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+  <generator uri="https://gohugo.io/" version="{{ hugo.Version }}">Hugo</generator>
+  <author>
+    <name>{{ site.Params.author.name }}</name>
+    <uri>{{ absURL "" }}</uri>
+  </author>
+
+{{- $output_formats := .OutputFormats -}}
+{{- range $output_formats -}}
+  {{- $rel := (or (and (eq "atom" (.Name | lower)) "self") "alternate") }}
+  {{- with $output_formats.Get .Name }}
+  {{ printf `<link href=%q rel=%q type=%q title=%q />` .Permalink $rel .MediaType.Type .Name | safeHTML }}
+  {{- end }}
+{{- end }}
+  <subtitle>{{ .Param "description" }}</subtitle>
+  <icon>{{ absURL "/favicon.ico" }}</icon>
+
+{{- with site.Copyright }}
+  {{- $copyright := replace . "{year}" now.Year }}
+  <rights>{{ $copyright | plainify }}</rights>
+{{- end }}
+
+{{- $pages := .RegularPages -}}
+{{- if (eq .Kind "home") -}}
+  {{- $pages = site.RegularPages -}}
+{{- end -}}
+{{- $pages = where $pages ".Section" "blog" -}}
+{{- $pages = where $pages ".Params.disable_feed" "!=" true }}
+{{- $pages = where $pages ".Params.unlisted" "!=" true }}
+
+{{- range $pages }}
+  {{- $page := . }}
+  <entry>
+    <id>{{ .Permalink }}</id>
+    <title>{{ .Title | plainify }}</title>
+    <published>{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</published>
+    <updated>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+    <link href="{{ .Permalink }}" rel="alternate" type="text/html" />
+    {{ printf `<content type="html"><![CDATA[%s]]></content>` (partial "minify.html" (dict "text" .Content)) | safeHTML }}
+  </entry>
+{{- end }}
+</feed>

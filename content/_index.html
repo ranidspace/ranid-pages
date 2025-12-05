@@ -2,79 +2,13 @@
 title = 'Ranid Website'
 +++
 
-<style>
-  .info-flex {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1.5em;
-    margin: 5rem auto;
-  }
-
-  .info-text {
-    text-align: justify;
-    padding: 0;
-    max-width: 35rem;
-  }
-
-  .media-list {
-    display: block;
-    min-width: 18rem;
-    font-style: normal;
-  }
-
-  .social {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
-  }
-  .social > img {
-    height: 0.9lh;
-    width: 1.5em;
-  }
-
-  .media-list-mobile {
-    display: none;
-    width: 80%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .media-list-mobile img {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-
-  @media screen and (max-device-width: 1000px) {
-    .info-flex {
-      flex-direction: column;
-      gap: 3em;
-      margin: 3em 0;
-    }
-
-    .info-text {
-      max-width: none;
-    }
-
-    .media-list {
-      display: none;
-    }
-    .media-list-mobile {
-      display: flex;
-    }
-  }
-</style>
-
-<div class=info-flex>
-<p class="info-text">
-  Hey this is Audrey (They/It/Xe), also known as ranidspace. I'm into computer
-  science, astronomy, video games, 3D art, and whatever I feel like at the time.
-  I'm not good at graphic design so this website may look a little ass but I'm
-  hoping to improve as I continue to work on it.
-</p>
-<address class="media-list-mobile">{{< social mobile >}}</address>
-<address class="media-list">Find me here: {{< social >}}</address>
+<div class="info-flex">
+  <p class="info-text">
+    Hey this is Audrey (They/It/Xe), also known as ranidspace. I'm into computer
+    science, astronomy, video games, 3D art, and whatever I feel like at the
+    time. I'm not good at graphic design so this website may look a little ass
+    but I'm hoping to improve as I continue to work on it.
+  </p>
+  <address class="media-list-mobile">{{< social mobile >}}</address>
+  <address class="media-list">Find me here:{{< social >}}</address>
 </div>

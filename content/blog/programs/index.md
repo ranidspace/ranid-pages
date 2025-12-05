@@ -1,7 +1,7 @@
 ---
 title: 'Programs and Services I Use'
 date: 2023-07-15 17:03:00
-modified: 2024-01-02
+lastmod: 2024-01-02
 ---
 
 I've decided to make a bit of a blog here in order to fill up this first page.
@@ -19,9 +19,12 @@ extensions:
 [LocalCDN](https://addons.mozilla.org/en-CA/firefox/addon/localcdn-fork-of-decentraleyes/).
 
 <ins class="edit" datetime="2024-01-02">
-    2024-01-02 Update: <br /> Turns out that LocalCDN is ALSO not needed,
-    and is covered by Ublock origin. i've been wanting to put this here for a
-    while but i only did it now.
+    <p>
+    2024-01-02 Update:<br>
+    Turns out that LocalCDN is ALSO not needed, and is covered by Ublock
+    origin. i've been wanting to put this here for a while but i only did it
+    now.
+    </p>
 </ins>
 
 This list was actually a lot longer. I then later found out that a bunch of
@@ -34,7 +37,7 @@ HTTPS everywhere is just built into Firefox these days, it's this thing:
 text which reads 'HTTPS provides a secure, encrypted connection between Firefox
 and the websites you visit. Most websites support HTTPS, and if HTTPS-Only Mode
 is enabled, then Firefox will upgrade all connections to HTTPS.'
-](/images/blog/HTTPSonlymode.png)
+]({{< resource src="HTTPSonlymode.png" >}})
 
 Firefox in general can be
 [hardened for privacy](https://brainfucksec.github.io/firefox-hardening-guide)
@@ -57,4 +60,5 @@ This is basic security
 
 Anyway, most people I know already know this stuff, I really just made this in
 order to get something interesting on this page. Happy surfing.
+
 

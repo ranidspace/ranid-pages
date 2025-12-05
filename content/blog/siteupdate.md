@@ -1,7 +1,6 @@
 ---
 title: "Site Backend Update"
 date: 2025-01-15 21:37:00
-layout: '@layouts/Blog.astro'
 ---
 I have moved this site from doing everything manually to a content management
 system, [Jekyll](https://jekyllrb.com/), which means making blog posts and

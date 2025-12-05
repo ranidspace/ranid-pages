@@ -1,8 +1,49 @@
-baseURL = 'https://ranid.space/'
-languageCode = 'en_CA'
-title = 'The Ranid Space'
-timeZone = 'America/Toronto'
+baseURL = "https://ranid.space/"
+languageCode = "en-ca"
+copyright = "{year}, ranidspace"
+title = "The Ranid Space"
+timeZone = "America/Toronto"
+summaryLength = 500
+disableKinds = ["rss"]
+disableHugoGeneratorInject = true
+
+[outputs]
+home = ["html", "atom"]
+taxonomy = []
+
+[mediaTypes."application/atom+xml"]
+suffixes = ["atom"]
+
+[outputFormats.Atom]
+# https://validator.w3.org/feed/docs/atom.html#whatIsAtom
+name = "Atom"
+mediaType = "application/atom+xml"
+baseName = "feed"
+isPlainText = false
+rel = "alternate"
+isHTML = false
+noUgly = true
+permalinkable = false
+
 [params]
-    description = "Personal website/blog for me, ranidspace. hi."
+description = "Personal website/blog for me, ranidspace. hi."
+
 [params.author]
-    name = "ranidspace"
+name = "ranidspace"
+
+[markup.goldmark.extensions.extras.insert]
+enable = true
+
+[markup.goldmark.parser]
+autoHeadingID = false
+wrapStandAloneImageWithinParagraph = false
+
+[markup.goldmark.parser.attribute]
+block = true
+title = true
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[minify.tdewolff.html]
+keepWhitespace = false

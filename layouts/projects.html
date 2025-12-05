@@ -1,0 +1,52 @@
+{{- define "style" -}}
+  <style>
+    .projects {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .projectText {
+      padding: 2em;
+    }
+
+    img {
+      width: 20rem;
+    }
+
+    @media screen and (max-width: 1000px) {
+      .project {
+        flex-direction: column !important;
+      }
+      .projectText {
+        padding: 0;
+      }
+      img {
+        width: 10rem;
+      }
+    }
+  </style>
+{{- end }}
+
+{{- define "main" }}
+  {{ .Content }}
+  <ul class="contentlist">
+    {{ range $i, $p := .Site.Data.projects }}
+        {{ if mod $i 2 }}
+      <li class="project">
+      {{ else }}
+      <li class="project" style= "flex-direction: row-reverse;">
+      {{ end }}
+      <img src="{{ printf "/images/projects/%s.png" .id }}" alt="{{ .alt }}">
+        <hgroup class="projectText">
+          <h2><a href="{{ .link }}">{{ .title }}</a></h2>
+          <p>{{ .description }}</p>
+        </hgroup>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
