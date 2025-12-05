@@ -16,3 +16,4 @@
 - name: "Atom(RSS) feed"
   link: "/feed.atom"
   icon: "rss.svg"
+  alt: "RSS"
