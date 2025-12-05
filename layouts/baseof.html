@@ -1,4 +1,13 @@
-{{ $description := or .Description .Site.Params.description -}}
+{{- $description := or .Description .Site.Params.description }}
+{{- $type := "website" }}
+{{- if eq .Section "blog" }}
+  {{ if .Truncated }}
+    {{- $description = .Summary | plainify }}
+  {{ else }}
+    {{- $description = index (split (.Summary | plainify) "\n") 0 }}
+  {{ end }}
+  {{- $type = "article" }}
+{{- end -}}
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,13 +15,13 @@
     <title>{{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $description }}">
+
     <meta name="author" content="{{ .Site.Params.author.name }}">
-    {{/* <meta name="canonical" content="{{ .CanonUrl }}" /> */}}
+    <meta name="canonical" content="{{ .Permalink }}">
     <meta name="og:title" content="{{ .Title }}">
     <meta name="og:description" content="{{ $description }}">
-    {{/* <meta name="og:url" content="{{ .canonUrl }}" /> */}}
     <meta name="og:site_name" content="{{ .Site.Title }}">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="og:type" content="{{ $type }}">
     <link rel="alternate" type="application/atom+xml" href="/feed.atom">
     {{- $style := resources.Get "styles/style.css" | resources.Minify |
       resources.Fingerprint
@@ -27,11 +36,13 @@
       <header>
         <h1>Ranid's Space</h1>
         <nav>
-          <a href="/">Main</a> | <a href="/blog">Blog</a> |
-          <a href="/projects">Projects</a> | <a href="/art">Art</a> |
-          <a href="https://doomhardy.neocities.org" rel="external"
-            >Partner Site</a
-          >
+          <a href="/">Main</a> |
+          <a href="/blog">Blog</a> |
+          <a href="/projects">Projects</a> |
+          <a href="/art">Art</a> |
+          <a href="https://doomhardy.neocities.org" rel="external">
+            Partner Site
+          </a >
         </nav>
       </header>
       <hr>
