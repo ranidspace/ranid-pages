@@ -6,6 +6,7 @@ timeZone = "America/Toronto"
 summaryLength = 500
 disableKinds = ["rss"]
 disableHugoGeneratorInject = true
+enableRobotsTXT = true
 
 [outputs]
 home = ["html", "atom"]
