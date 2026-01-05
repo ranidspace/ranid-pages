@@ -1,6 +1,6 @@
-{{ define "main" }}
+{{- define "main" }}
   <ul class="contentlist">
-    {{ range .Pages }}
+    {{- range .Pages }}
       <li class="blogpost">
         <hgroup>
           <h2 class="blogtitle">
@@ -11,22 +11,22 @@
               {{ .Date | time.Format "2006-01-02 03:04 PM" }}
             </time>
           </p>
-          {{ if not (eq .Lastmod .Date) }}
+          {{- if not (eq .Lastmod .Date) }}
             <p class="postdate">
               Updated
               <time datetime="{{ .Lastmod | time.Format "2006-01-02" }}">
                 {{ .Lastmod | time.Format "2006-01-02" }}
               </time>
             </p>
-          {{ end }}
+          {{- end }}
         </hgroup>
-        {{ .Summary }}
-        {{ if .Truncated }}
+        {{- .Summary }}
+        {{- if .Truncated }}
           <p>
             <a href="{{ .RelPermalink }}">[View full post]</a>
           </p>
-        {{ end }}
+        {{- end }}
       </li>
-    {{ end }}
+    {{- end }}
   </ul>
-{{ end }}
+{{- end }}

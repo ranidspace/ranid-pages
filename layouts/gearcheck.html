@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <title>Splatoon 3 Gear Completion Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{- with .Resources.Get "gearchecker.js" | minify | fingerprint -}}
-      <script src="{{ .RelPermalink }}"></script>
-    {{ end }}
+    <link rel="canonical" href="{{ .Permalink }}">
 
     {{- $style := resources.Get "styles/gearstyle.css" | resources.Minify |
       resources.Fingerprint
     }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
-    {{ block "style" . }}
-    {{ end }}
+    {{- block "style" . }}
+    {{- end }}
+    {{- with .Resources.Get "gearchecker.js" | minify | fingerprint }}
+    <script src="{{ .RelPermalink }}"></script>
+    {{- end}}
   </head>
   {{ .Content }}
 

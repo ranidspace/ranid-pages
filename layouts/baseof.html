@@ -1,13 +1,16 @@
 {{- $description := or .Description .Site.Params.description }}
 {{- $type := "website" }}
+
 {{- if eq .Section "blog" }}
-  {{ if .Truncated }}
+  {{- if .Truncated }}
     {{- $description = .Summary | plainify }}
-  {{ else }}
+  {{- else }}
     {{- $description = index (split (.Summary | plainify) "\n") 0 }}
-  {{ end }}
+  {{- end }}
   {{- $type = "article" }}
 {{- end -}}
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,20 +18,19 @@
     <title>{{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $description }}">
-
     <meta name="author" content="{{ .Site.Params.author.name }}">
-    <meta name="canonical" content="{{ .Permalink }}">
     <meta name="og:title" content="{{ .Title }}">
     <meta name="og:description" content="{{ $description }}">
     <meta name="og:site_name" content="{{ .Site.Title }}">
     <meta name="og:type" content="{{ $type }}">
     <link rel="alternate" type="application/atom+xml" href="/feed.atom">
+    <link rel="canonical" content="{{ .Permalink }}">
     {{- $style := resources.Get "styles/style.css" | resources.Minify |
       resources.Fingerprint
     }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
-    {{ block "style" . }}
-    {{ end }}
+    {{- block "style" . }}
+    {{- end }}
   </head>
 
   <body>
@@ -42,7 +44,7 @@
           <a href="/art">Art</a> |
           <a href="https://doomhardy.neocities.org" rel="external">
             Partner Site
-          </a >
+          </a>
         </nav>
       </header>
       <hr>

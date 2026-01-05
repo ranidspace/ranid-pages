@@ -1,4 +1,4 @@
-{{ define "main" }}
+{{- define "main" }}
   <article>
     <hgroup>
       <h2 class="blogtitle">{{ .Title }}</h2>
@@ -7,16 +7,15 @@
           {{ .Date | time.Format "2006-01-02 03:04 PM" }}
         </time>
       </p>
-      {{ if not (eq .Lastmod .Date) }}
+      {{- if not (eq .Lastmod .Date) }}
         <p class="postdate">
           Updated
           <time datetime="{{ .Lastmod | time.Format "2006-01-02" }}">
             {{ .Lastmod | time.Format "2006-01-02" }}
           </time>
         </p>
-      {{ end }}
+      {{- end }}
     </hgroup>
-
     {{ .Content }}
   </article>
-{{ end }}
+{{- end }}
